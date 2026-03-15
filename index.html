@@ -15,10 +15,10 @@
             background-color: #f4f7f6;
         }
 
-        /* Navigation */
+        /* Navigation with Logo and Legal Name */
         nav {
             background-color: #000000; 
-            padding: 15px 5%;
+            padding: 10px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -28,10 +28,26 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.4);
         }
 
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* Espacio entre el logo y el texto legal */
+        }
+
         .logo-img {
-            height: 150px;
+            height: 100px; /* Ajustado de 150px a 60px para que no tape la pantalla */
             width: auto;
             display: block;
+        }
+
+        .legal-name {
+            color: #bdc3c7; /* Color gris sutil */
+            font-size: 0.75rem;
+            border-left: 1px solid #444; /* Línea divisoria vertical */
+            padding-left: 15px;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         nav ul {
@@ -156,18 +172,22 @@
             border-top: 1px solid #333;
         }
 
-        @media (max-width: 768px) {
-            nav { flex-direction: column; padding: 20px; }
-            nav ul { margin-top: 20px; }
-            header h1 { font-size: 2.5rem; }
+        @media (max-width: 900px) {
+            nav { flex-direction: column; padding: 20px; gap: 15px; }
+            .brand-container { flex-direction: column; text-align: center; gap: 5px; }
+            .legal-name { border-left: none; padding-left: 0; }
+            nav ul li { margin: 0 10px; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo-container">
+        <div class="brand-container">
             <img src="withyourbiz-logo.png" alt="WithYourBiz Logo" class="logo-img">
+            <div class="legal-name">
+                by Alvarez & Lameda<br>Business Solutions LLC
+            </div>
         </div>
         <ul>
             <li><a href="#services">Services</a></li>
@@ -193,12 +213,12 @@
             <div class="card" id="technology">
                 <img src="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&q=80&w=800" alt="AI & Data Science" class="card-image">
                 <div class="card-content">
-                    <h3>Data Science & IA</h3>
+                    <h3>Data Science & AI</h3>
                     <p>We turn complex data into strategic decisions using advanced predictive models and customized financial dashboards.</p>
                 </div>
             </div>
             <div class="card">
-                <img src="https://images.unsplash.com/photo-1591439657848-9f4b9ce436b9?q=80&w=2004&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Automation & Python" class="card-image">
+                <img src="https://images.unsplash.com/photo-1591439657848-9f4b9ce436b9?q=80&w=2004&auto=format&fit=crop" alt="Automation & Python" class="card-image">
                 <div class="card-content">
                     <h3>RPA & Python</h3>
                     <p>Streamline your operations by eliminating manual repetitive tasks through custom-built automation scripts and bots.</p>

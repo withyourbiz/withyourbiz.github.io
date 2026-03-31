@@ -1,243 +1,855 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WithYourBiz | Finance & AI Automation</title>
-    <style>
-        /* Base Styles */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            line-height: 1.6;
-            background-color: #f4f7f6;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WithYourBiz | Finance & AI Automation</title>
+  <style>
+    :root {
+      --black: #000000;
+      --purple: #8B5CF6;
+      --purple-dark: #6D28D9;
+      --purple-dim: rgba(139,92,246,0.1);
+      --purple-border: rgba(139,92,246,0.25);
+      --white: #ffffff;
+      --gray: #9CA3AF;
+      --card: #0D0D0D;
+      --border: rgba(255,255,255,0.07);
+    }
 
-        /* Navigation with Logo and Legal Name */
-        nav {
-            background-color: #000000; 
-            padding: 10px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-        }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
-        .brand-container {
-            display: flex;
-            align-items: center;
-            gap: 15px; /* Espacio entre el logo y el texto legal */
-        }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
 
-        .logo-img {
-            height: 100px; /* Ajustado de 150px a 60px para que no tape la pantalla */
-            width: auto;
-            display: block;
-        }
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 6%;
+      background: rgba(0,0,0,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
 
-        .legal-name {
-            color: #bdc3c7; /* Color gris sutil */
-            font-size: 0.75rem;
-            border-left: 1px solid #444; /* Línea divisoria vertical */
-            padding-left: 15px;
-            line-height: 1.2;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+    .nav-logo img {
+      height: 130px;
+      width: auto;
+      display: block;
+    }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            margin: 0;
-            padding: 0;
-        }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.88rem;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
 
-        nav ul li {
-            margin-left: 35px;
-        }
+    .nav-cta {
+      background: var(--purple) !important;
+      color: var(--white) !important;
+      padding: 0.5rem 1.3rem;
+      border-radius: 100px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--purple-dark) !important; }
 
-        nav ul li a {
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 9rem 6% 5rem;
+      position: relative;
+      overflow: hidden;
+    }
 
-        nav ul li a:hover {
-            color: #a29bfe;
-        }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(139,92,246,0.15) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -55%);
+      pointer-events: none;
+    }
 
-        /* Hero Section */
-        header {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), 
-                        url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2026') no-repeat center center/cover;
-            height: 60vh;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-        }
+    .hero-logo {
+      height: 64px;
+      width: auto;
+      margin-bottom: 1.8rem;
+    }
 
-        header h1 {
-            font-size: 3.5rem;
-            margin-bottom: 15px;
-            letter-spacing: -1px;
-        }
+    .hero-byline {
+      font-size: 0.82rem;
+      color: var(--gray);
+      letter-spacing: 0.08em;
+      margin-bottom: 2.5rem;
+      text-transform: uppercase;
+    }
 
-        header p {
-            font-size: 1.3rem;
-            max-width: 700px;
-            font-weight: 300;
-        }
+    .hero h1 {
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+    }
+    .hero h1 em {
+      color: var(--purple);
+      font-style: normal;
+      display: block;
+    }
 
-        /* Content Sections */
-        .container {
-            padding: 80px 20px;
-            max-width: 1200px;
-            margin: auto;
-        }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: var(--gray);
+      max-width: 560px;
+      line-height: 1.8;
+      margin-bottom: 2.8rem;
+    }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-        }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-        .card {
-            background: #ffffff;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
-        }
+    .btn-primary {
+      background: var(--purple);
+      color: var(--white);
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 0.85rem 2rem;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--purple-dark); transform: translateY(-2px); }
 
-        .card:hover {
-            transform: translateY(-10px);
-        }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      font-size: 0.95rem;
+      padding: 0.85rem 2rem;
+      border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.18);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--purple); color: var(--purple); }
 
-        .card-image {
-            height: 220px;
-            width: 100%;
-            object-fit: cover;
-        }
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+      width: 100%;
+      max-width: 720px;
+    }
+    .hero-stat .n {
+      display: block;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--purple);
+      letter-spacing: -0.02em;
+    }
+    .hero-stat .l {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--gray);
+      margin-top: 0.2rem;
+      max-width: 120px;
+      line-height: 1.4;
+    }
 
-        .card-content {
-            padding: 30px;
-        }
+    /* ── SECTION SHARED ── */
+    section { padding: 6rem 6%; }
 
-        .card h3 {
-            color: #2d3436;
-            margin-top: 0;
-            font-size: 1.5rem;
-        }
+    .eyebrow {
+      display: block;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 0.8rem;
+    }
 
-        /* Contact Section */
-        .contact-section {
-            background-color: #1a1a1a;
-            color: white;
-            padding: 80px 20px;
-            text-align: center;
-        }
+    .sec-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
+    .sec-title span { color: var(--purple); }
 
-        .contact-email {
-            font-size: 1.8rem;
-            color: #a29bfe;
-            text-decoration: none;
-            font-weight: bold;
-            display: block;
-            margin-top: 20px;
-            transition: opacity 0.3s;
-        }
+    .sec-desc {
+      font-size: 1rem;
+      color: var(--gray);
+      line-height: 1.75;
+      max-width: 580px;
+      margin-bottom: 3rem;
+    }
 
-        .contact-email:hover {
-            opacity: 0.8;
-        }
+    /* ── TABS ── */
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .tab {
+      padding: 0.45rem 1.1rem;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      font-size: 0.83rem;
+      color: var(--gray);
+      cursor: pointer;
+      background: transparent;
+      transition: all 0.2s;
+    }
+    .tab:hover { border-color: var(--purple-border); color: var(--purple); }
+    .tab.active { background: var(--purple); color: var(--white); border-color: var(--purple); }
 
-        footer {
-            background: #000000;
-            color: #a0a0a0;
-            text-align: center;
-            padding: 40px 20px;
-            border-top: 1px solid #333;
-        }
+    /* ── SERVICE GROUP ── */
+    .svc-group { margin-bottom: 3rem; }
 
-        @media (max-width: 900px) {
-            nav { flex-direction: column; padding: 20px; gap: 15px; }
-            .brand-container { flex-direction: column; text-align: center; gap: 5px; }
-            .legal-name { border-left: none; padding-left: 0; }
-            nav ul li { margin: 0 10px; }
-        }
-    </style>
+    .group-label {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 1.5rem;
+    }
+    .group-label span {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+    .group-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── CARDS GRID ── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.2s;
+    }
+    .card:hover { background: #111; }
+    .card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--ac, var(--purple));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s;
+    }
+    .card:hover::after { transform: scaleX(1); }
+
+    .card-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 1.2rem;
+      filter: brightness(0.85);
+    }
+
+    .card-icon {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-badge {
+      display: inline-block;
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.22rem 0.7rem;
+      border-radius: 100px;
+      margin-bottom: 0.8rem;
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .card p {
+      font-size: 0.83rem;
+      color: var(--gray);
+      line-height: 1.65;
+      margin-bottom: 1.2rem;
+    }
+
+    .card-list {
+      list-style: none;
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+    }
+    .card-list li {
+      font-size: 0.78rem;
+      color: rgba(156,163,175,0.75);
+      padding: 0.28rem 0 0.28rem 1rem;
+      position: relative;
+      line-height: 1.4;
+    }
+    .card-list li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0.58rem;
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--ac, var(--purple));
+      opacity: 0.65;
+    }
+
+    /* ── TECHNOLOGY (existing section kept) ── */
+    .tech-section { background: #050505; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .tech-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .tech-card:hover { border-color: var(--purple-border); }
+
+    .tech-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      filter: brightness(0.75) saturate(0.8);
+    }
+
+    .tech-card-body { padding: 1.5rem; }
+
+    .tech-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .tech-card p {
+      font-size: 0.82rem;
+      color: var(--gray);
+      line-height: 1.65;
+    }
+
+    /* ── WHY US ── */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .why-card {
+      padding: 2rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .why-card:hover { background: var(--card); }
+    .why-icon { font-size: 1.4rem; margin-bottom: 0.8rem; display: block; }
+    .why-card h3 { font-size: 0.98rem; font-weight: 600; color: var(--white); margin-bottom: 0.4rem; }
+    .why-card p { font-size: 0.8rem; color: var(--gray); line-height: 1.65; }
+
+    /* ── PROCESS ── */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    .process-step {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.8rem;
+      transition: border-color 0.2s;
+    }
+    .process-step:hover { border-color: var(--purple-border); }
+    .step-n {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: rgba(139,92,246,0.15);
+      line-height: 1;
+      margin-bottom: 0.8rem;
+    }
+    .process-step h3 { font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 0.4rem; }
+    .process-step p { font-size: 0.82rem; color: var(--gray); line-height: 1.6; }
+
+    /* ── CTA ── */
+    .cta-section {
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      pointer-events: none;
+    }
+    .cta-section h2 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+    .cta-section h2 span { color: var(--purple); }
+    .cta-section p { color: var(--gray); font-size: 1rem; max-width: 460px; margin: 0 auto 2.5rem; line-height: 1.75; }
+    .cta-note { margin-top: 1.5rem; font-size: 0.75rem; color: rgba(156,163,175,0.45); letter-spacing: 0.08em; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    footer img { height: 28px; width: auto; }
+    .footer-links { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; }
+    .footer-links a { font-size: 0.82rem; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-copy { font-size: 0.72rem; color: rgba(156,163,175,0.35); letter-spacing: 0.05em; }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 5%; }
+      .nav-links { display: none; }
+      .hero-stats { gap: 1.5rem; }
+      .cards { grid-template-columns: 1fr; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
 </head>
 <body>
 
-    <nav>
-        <div class="brand-container">
-            <img src="withyourbiz-logo.png" alt="WithYourBiz Logo" class="logo-img">
-            <div class="legal-name">
-                by Alvarez & Lameda<br>Business Solutions LLC
-            </div>
-        </div>
-        <ul>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#technology">Technology</a></li>
-            <li><a href="#contact">Contact</a></li>
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="https://www.withyourbiz.com/withyourbiz-logo.png" alt="WithYourBiz Logo" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#technology">Technology</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact" class="nav-cta">Free Consultation</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <img class="hero-logo" src="https://www.withyourbiz.com/withyourbiz-logo.png" alt="WithYourBiz" />
+  <p class="hero-byline">by Alvarez &amp; Lameda Business Solutions LLC</p>
+  <h1>Smart Finance,<em>Better Biz.</em></h1>
+  <p class="hero-sub">Elite accounting expertise powered by Data Science and Intelligent Automation — for Latino businesses in the US and LATAM.</p>
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">Free Consultation</a>
+    <a href="#services" class="btn-outline">View Services</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="n">+5M</span><span class="l">Latino businesses in the US</span></div>
+    <div class="hero-stat"><span class="n">100%</span><span class="l">Remote & in Spanish</span></div>
+    <div class="hero-stat"><span class="n">3</span><span class="l">Markets: USA · LATAM · Venezuela</span></div>
+    <div class="hero-stat"><span class="n">$0</span><span class="l">First consultation always free</span></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <span class="eyebrow">Our Services</span>
+  <h2 class="sec-title">Everything your business<br><span>needs in one place</span></h2>
+  <p class="sec-desc">From opening your LLC in the US to keeping it fully compliant. Services built for the Latino entrepreneur who wants to do things right from day one.</p>
+
+  <div class="tabs">
+    <button class="tab active" onclick="filterTab('all',this)">All Services</button>
+    <button class="tab" onclick="filterTab('usa',this)">🇺🇸 US Businesses</button>
+    <button class="tab" onclick="filterTab('latam',this)">🌎 Open LLC from LATAM</button>
+    <button class="tab" onclick="filterTab('ve',this)">🇻🇪 Venezuela</button>
+  </div>
+
+  <!-- US -->
+  <div class="svc-group" data-group="usa">
+    <div class="group-label"><span>🇺🇸 &nbsp;For active businesses in the United States</span></div>
+    <div class="cards">
+
+      <div class="card" style="--ac:#8B5CF6">
+        <div class="card-icon" style="background:rgba(139,92,246,0.12)">📊</div>
+        <span class="card-badge" style="background:rgba(139,92,246,0.12);color:#A78BFA;border:1px solid rgba(139,92,246,0.25)">Most requested</span>
+        <h3>Monthly Bookkeeping</h3>
+        <p>Complete recording and organization of all your financial transactions. You'll always know exactly where your business stands.</p>
+        <ul class="card-list">
+          <li>Income & expense tracking</li>
+          <li>Monthly bank reconciliation</li>
+          <li>Monthly financial statements</li>
+          <li>QuickBooks reporting</li>
         </ul>
-    </nav>
+      </div>
 
-    <header>
-        <h1>Smart Finance, Better Biz</h1>
-        <p>Elite accounting expertise powered by Data Science and Intelligent Automation.</p>
-    </header>
+      <div class="card" style="--ac:#8B5CF6">
+        <div class="card-icon" style="background:rgba(139,92,246,0.12)">📋</div>
+        <h3>Tax Preparation & Filing</h3>
+        <p>Annual federal and state tax return preparation with every deduction you're entitled to. No surprises.</p>
+        <ul class="card-list">
+          <li>Form 1040 with Schedule C</li>
+          <li>LLC & S-Corp returns</li>
+          <li>Deduction optimization</li>
+          <li>State taxes included</li>
+        </ul>
+      </div>
 
-    <div class="container" id="services">
-        <div class="grid">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=800" alt="Financial Services" class="card-image">
-                <div class="card-content">
-                    <h3>Financial Services</h3>
-                    <p>Strategic consulting and tax management with 19 years of experience, ensuring financial health for firms and corporations in the USA.</p>
-                </div>
-            </div>
-            <div class="card" id="technology">
-                <img src="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&q=80&w=800" alt="AI & Data Science" class="card-image">
-                <div class="card-content">
-                    <h3>Data Science & AI</h3>
-                    <p>We turn complex data into strategic decisions using advanced predictive models and customized financial dashboards.</p>
-                </div>
-            </div>
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1591439657848-9f4b9ce436b9?q=80&w=2004&auto=format&fit=crop" alt="Automation & Python" class="card-image">
-                <div class="card-content">
-                    <h3>RPA & Python</h3>
-                    <p>Streamline your operations by eliminating manual repetitive tasks through custom-built automation scripts and bots.</p>
-                </div>
-            </div>
-        </div>
+      <div class="card" style="--ac:#8B5CF6">
+        <div class="card-icon" style="background:rgba(139,92,246,0.12)">💰</div>
+        <h3>Quarterly Estimated Taxes</h3>
+        <p>We calculate your quarterly IRS payments and alert you before each deadline — so Tax Day is never a surprise.</p>
+        <ul class="card-list">
+          <li>Exact amount calculation</li>
+          <li>Reminders before each deadline</li>
+          <li>IRS Direct Pay guidance</li>
+          <li>Adjusted to real income</li>
+        </ul>
+      </div>
+
+      <div class="card" style="--ac:#8B5CF6">
+        <div class="card-icon" style="background:rgba(139,92,246,0.12)">👥</div>
+        <h3>Payroll Administration</h3>
+        <p>Full payroll management for businesses with employees. Quarterly reports, W-2s and total compliance.</p>
+        <ul class="card-list">
+          <li>Weekly or biweekly payroll</li>
+          <li>Forms 941, 940 & W-2</li>
+          <li>Payroll tax deposits</li>
+          <li>Up to 15 employees</li>
+        </ul>
+      </div>
+
+      <div class="card" style="--ac:#8B5CF6">
+        <div class="card-icon" style="background:rgba(139,92,246,0.12)">🌴</div>
+        <span class="card-badge" style="background:rgba(239,68,68,0.1);color:#FCA5A5;border:1px solid rgba(239,68,68,0.2)">Due May 1st</span>
+        <h3>Annual Report — Sunbiz Florida</h3>
+        <p>We file your annual report with the state of Florida to keep your company active and avoid automatic penalties.</p>
+        <ul class="card-list">
+          <li>Filing at sunbiz.org</li>
+          <li>Company data update</li>
+          <li>Filing confirmation</li>
+          <li>Annual reminder included</li>
+        </ul>
+      </div>
+
     </div>
+  </div>
 
-    <section id="contact" class="contact-section">
-        <h2>Ready to optimize your business?</h2>
-        <p>Contact us for a personalized consultation:</p>
-        <a href="mailto:withyourbiz@gmail.com" class="contact-email">withyourbiz@gmail.com</a>
-    </section>
+  <!-- LATAM -->
+  <div class="svc-group" data-group="latam">
+    <div class="group-label"><span>🌎 &nbsp;Open an LLC from anywhere in the world</span></div>
+    <div class="cards">
 
-    <footer>
-        <strong>WithYourBiz</strong>
-        <p>Alvarez & Lameda Business Solutions LLC</p>
-        <p>&copy; 2026 All Rights Reserved.</p>
-    </footer>
+      <div class="card" style="--ac:#10B981">
+        <div class="card-icon" style="background:rgba(16,185,129,0.1)">🏢</div>
+        <span class="card-badge" style="background:rgba(16,185,129,0.1);color:#6EE7B7;border:1px solid rgba(16,185,129,0.2)">100% remote</span>
+        <h3>LLC Formation in the US</h3>
+        <p>We guide you through the entire process of forming your company in the United States from Venezuela, Colombia, Mexico or wherever you are.</p>
+        <ul class="card-list">
+          <li>Ideal state selection</li>
+          <li>Articles of organization</li>
+          <li>Registered agent included</li>
+          <li>Operating Agreement</li>
+        </ul>
+      </div>
+
+      <div class="card" style="--ac:#10B981">
+        <div class="card-icon" style="background:rgba(16,185,129,0.1)">🔑</div>
+        <h3>EIN Obtainment</h3>
+        <p>We process your federal tax ID with the IRS — essential for opening bank accounts and operating legally in the US.</p>
+        <ul class="card-list">
+          <li>Form SS-4 application</li>
+          <li>Non-resident process</li>
+          <li>EIN in 2–4 weeks</li>
+          <li>Official IRS letter included</li>
+        </ul>
+      </div>
+
+      <div class="card" style="--ac:#10B981">
+        <div class="card-icon" style="background:rgba(16,185,129,0.1)">🏦</div>
+        <h3>US Dollar Bank Account</h3>
+        <p>We guide you to open a business bank account in the US with digital banks that accept non-residents — no travel needed.</p>
+        <ul class="card-list">
+          <li>Mercury, Relay or Wise Business</li>
+          <li>No travel to the US required</li>
+          <li>Step-by-step guidance</li>
+          <li>Ready for international payments</li>
+        </ul>
+      </div>
+
+      <div class="card" style="--ac:#10B981">
+        <div class="card-icon" style="background:rgba(16,185,129,0.1)">✅</div>
+        <h3>Post-Formation Compliance</h3>
+        <p>We keep your LLC active and compliant: annual reports, Form 5472 for non-residents and all required updates.</p>
+        <ul class="card-list">
+          <li>State annual report</li>
+          <li>Form 5472 filing</li>
+          <li>Annual reminders</li>
+          <li>Registered agent renewal</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- VENEZUELA -->
+  <div class="svc-group" data-group="ve">
+    <div class="group-label"><span>🇻🇪 &nbsp;Services in Venezuela — Certified CPA</span></div>
+    <div class="cards">
+
+      <div class="card" style="--ac:#F59E0B">
+        <div class="card-icon" style="background:rgba(245,158,11,0.1)">⭐</div>
+        <span class="card-badge" style="background:rgba(245,158,11,0.1);color:#FCD34D;border:1px solid rgba(245,158,11,0.2)">Certified CPA</span>
+        <h3>Certified Public Accountant</h3>
+        <p>Formal accounting services in Venezuela through our certified public accountant with an active professional license.</p>
+        <ul class="card-list">
+          <li>SENIAT tax returns</li>
+          <li>Audited financial statements</li>
+          <li>General balance sheets</li>
+          <li>Legal accounting books</li>
+        </ul>
+      </div>
+
+      <div class="card" style="--ac:#F59E0B">
+        <div class="card-icon" style="background:rgba(245,158,11,0.1)">📑</div>
+        <h3>Venezuelan Tax Advisory</h3>
+        <p>Guidance and compliance with Venezuelan tax obligations: VAT, ISLR, withholdings and special returns.</p>
+        <ul class="card-list">
+          <li>VAT & ISLR returns</li>
+          <li>VAT & ISLR withholdings</li>
+          <li>SENIAT registration</li>
+          <li>VEN-NIF standards</li>
+        </ul>
+      </div>
+
+      <div class="card" style="--ac:#F59E0B">
+        <div class="card-icon" style="background:rgba(245,158,11,0.1)">🤝</div>
+        <h3>Administrative Management</h3>
+        <p>Representation and processing of corporate paperwork in Venezuela for entrepreneurs operating from abroad.</p>
+        <ul class="card-list">
+          <li>Commercial company registration</li>
+          <li>Government agency filings</li>
+          <li>Corporate data updates</li>
+          <li>Third-party representation</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TECHNOLOGY -->
+<section class="tech-section" id="technology">
+  <span class="eyebrow">Technology</span>
+  <h2 class="sec-title">Finance meets<br><span>intelligent automation</span></h2>
+  <p class="sec-desc">We combine expert accounting with cutting-edge technology to give your business a real competitive advantage.</p>
+
+  <div class="tech-grid">
+    <div class="tech-card">
+      <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=800" alt="Financial Services" />
+      <div class="tech-card-body">
+        <h3>Financial Services</h3>
+        <p>Strategic consulting and tax management with 19 years of experience, ensuring financial health for firms and corporations in the USA.</p>
+      </div>
+    </div>
+    <div class="tech-card">
+      <img src="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&q=80&w=800" alt="AI & Data Science" />
+      <div class="tech-card-body">
+        <h3>Data Science & AI</h3>
+        <p>We turn complex data into strategic decisions using advanced predictive models and customized financial dashboards.</p>
+      </div>
+    </div>
+    <div class="tech-card">
+      <img src="https://images.unsplash.com/photo-1591439657848-9f4b9ce436b9?q=80&w=2004&auto=format&fit=crop" alt="Automation & Python" />
+      <div class="tech-card-body">
+        <h3>RPA & Python Automation</h3>
+        <p>Streamline your operations by eliminating manual repetitive tasks through custom-built automation scripts and bots.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section>
+  <span class="eyebrow">Why WithYourBiz</span>
+  <h2 class="sec-title">Built for the<br><span>Latino entrepreneur</span></h2>
+  <p class="sec-desc">We're not a generic firm. We're Venezuelans who understand what it means to build from zero in a system that wasn't designed for us.</p>
+
+  <div class="why-grid">
+    <div class="why-card">
+      <span class="why-icon">🗣️</span>
+      <h3>Your language, for real</h3>
+      <p>We don't just speak Spanish — we understand Latin culture. We know what it's like to arrive without a network or credit history.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">🌍</span>
+      <h3>Three-market coverage</h3>
+      <p>USA · Venezuela · Colombia & LATAM. No direct competitor has this combination of active markets.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">⚖️</span>
+      <h3>Certified CPA in Venezuela</h3>
+      <p>Our partner holds a Certified Public Accountant degree — real technical credibility backed by professional certification.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">💰</span>
+      <h3>Accessible pricing</h3>
+      <p>Traditional CPAs in the US charge $200–500/hr. We offer accessible packages without sacrificing quality or attention.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">🤝</span>
+      <h3>Personal attention</h3>
+      <p>You're not a ticket. We know your business, alert you before deadlines, and treat you like a VIP client.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">🚀</span>
+      <h3>All in one</h3>
+      <p>Open your LLC, organize your accounting, file your taxes and manage payroll — all with the same team.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <span class="eyebrow">How it works</span>
+  <h2 class="sec-title">Your journey in<br><span>4 simple steps</span></h2>
+  <p class="sec-desc">No bureaucracy, no complications. From the first message to having your business fully compliant.</p>
+
+  <div class="process-grid">
+    <div class="process-step">
+      <div class="step-n">01</div>
+      <h3>Free consultation</h3>
+      <p>Tell us your situation. We explain exactly what you need and what it costs. No commitment.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-n">02</div>
+      <h3>Custom proposal</h3>
+      <p>We send you a tailored plan with all the services that apply to your specific case.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-n">03</div>
+      <h3>We get to work</h3>
+      <p>We handle the entire process. You receive updates at every stage — no surprises.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-n">04</div>
+      <h3>Business in compliance</h3>
+      <p>Active company, organized finances and taxes up to date. And we stay by your side month after month.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>Ready to put your<br>business <span>in order?</span></h2>
+  <p>First consultation completely free. No commitment. In Spanish. Write to us today and we'll respond within 24 hours.</p>
+  <a href="mailto:withyourbiz@gmail.com" class="btn-primary" style="font-size:1rem;padding:1rem 2.5rem;">Schedule your free consultation</a>
+  <p class="cta-note">withyourbiz.com &nbsp;·&nbsp; @withyourbiz &nbsp;·&nbsp; withyourbiz@gmail.com</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="https://www.withyourbiz.com/withyourbiz-logo.png" alt="WithYourBiz" />
+  <ul class="footer-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#technology">Technology</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <span class="footer-copy">© 2026 Alvarez &amp; Lameda Business Solutions LLC · All Rights Reserved</span>
+</footer>
+
+<script>
+  function filterTab(cat, el) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    document.querySelectorAll('.svc-group').forEach(g => {
+      g.style.display = (cat === 'all' || g.dataset.group === cat) ? '' : 'none';
+    });
+  }
+</script>
 
 </body>
 </html>
